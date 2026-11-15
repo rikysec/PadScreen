@@ -32,6 +32,8 @@ L'app per iPad si installa da Xcode (vedi sotto).
 | `windows/PadScreen.Core/` | Protocollo, sessione, ricerca Bonjour, tunnel USB (multipiattaforma) |
 | `windows/PadScreen.DevHost/` | Host di prova per macOS: manda un video di test all'app iPad |
 | `PROTOCOL.md` | Descrizione del protocollo di rete |
+| `REVISIONE.md` | Note tecniche per chi deve rivedere/ottimizzare il codice |
+| `PadScreen.sln`, `build.ps1` | Solution per Visual Studio e script di compilazione per Windows |
 
 ## Cosa serve sul PC
 
@@ -125,7 +127,13 @@ Registro completo: `%APPDATA%\PadScreen\padscreen.log` — impostazioni: `%APPDA
 
 ## Compilare da sorgente
 
-Programma Windows (serve .NET 10 SDK; si compila anche da macOS/Linux):
+Programma Windows, direttamente sul PC (serve .NET 10 SDK: `winget install -e --id Microsoft.DotNet.SDK.10`):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\build.ps1
+```
+
+Oppure da qualsiasi sistema (anche macOS/Linux):
 
 ```bash
 dotnet publish windows/PadScreen/PadScreen.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:EnableCompressionInSingleFile=true -o dist
